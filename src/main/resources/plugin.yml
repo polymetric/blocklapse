@@ -1,0 +1,13 @@
+name: Blocklapse
+version: ${project.version}
+main: net.nodium.mcplugins.blocklapse.Blocklapse
+api-version: 1.15
+depend: [ LogBlock ]
+authors: [ polymetric ]
+description: Allows the creation of timelapses from LogBlock logs.
+website: nodium.net/mcplugins/blocklapse
+commands:
+  bruh:
+    description: bruh
+    usage: /bruh
+    permission: blocklapse.bruh
