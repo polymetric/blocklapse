@@ -2,6 +2,7 @@ package net.nodium.mcplugins.blocklapse;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.text.ParseException;
@@ -20,6 +21,10 @@ public final class Blocklapse extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("blocklapse") || cmd.getName().equalsIgnoreCase("bl")) {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage("currently timelapse from console is not supported, sorry");
+            }
+
             if (args.length < 1) {
                 sender.sendMessage("do /blocklapse commands");
                 return true;

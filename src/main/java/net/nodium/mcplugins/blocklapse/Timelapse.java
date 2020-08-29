@@ -4,12 +4,7 @@ import de.diddiz.LogBlock.LogBlock;
 import de.diddiz.LogBlock.QueryParams;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Consumer;
-
-import java.sql.Date;
 
 public class Timelapse {
     // pointer to the instance of the plugin
@@ -21,6 +16,7 @@ public class Timelapse {
 
     private final LogBlock logBlock;
 
+    // parameters for logBlock command
     private QueryParams params;
 
     // time in the log that the timelapse should star - equivalent to LogBlock's "since" parameter - specified in ms since unix epoch
@@ -47,12 +43,16 @@ public class Timelapse {
         this.sender = sender;
         this.scheduler = blocklapse.getServer().getScheduler();
         this.logBlock = (LogBlock) blocklapse.getServer().getPluginManager().getPlugin("LogBlock");
+
         this.params = new QueryParams(logBlock);
+        this.params.world = ((Player) sender).getWorld();
+
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.intervalPlayback = intervalPlayback;
         this.intervalLookup = intervalLookup;
         this.timeCurrent = 0;
+
         this.paused = false;
         this.stopped = false;
     }
@@ -76,9 +76,10 @@ public class Timelapse {
                     sender.sendMessage("timelapse finished");
                     return;
                 }
-                params.since = Utils.minutesAgo(timeCurrent);
-                params.before = Utils.minutesAgo(timeCurrent) + 1;
-//                    logBlock.getCommandsHandler().new CommandRedo(sender, params, true);
+                params.since = Utils.minutesAgo(timeCurrent) + 2;
+                params.before = Utils.minutesAgo(timeCurrent);
+                params.silent = true;
+                logBlock.getCommandsHandler().new CommandRedo(sender, params, true);
                 timeCurrent += 60000;
             } catch (Exception e) {
 
