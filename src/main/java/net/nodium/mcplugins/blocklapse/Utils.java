@@ -9,7 +9,7 @@ public class Utils {
     }
 
     // takes ms since unix epoch and outputs how many minutes ago that was
-    public static int minutesAgo(long time) {
-        return (int) ((System.currentTimeMillis() - time) / 60000);
+    public static int secondsAgo(long time) {
+        return (int) ((System.currentTimeMillis() - time) / 1000);
     }
 }

@@ -42,19 +42,20 @@ public final class Blocklapse extends JavaPlugin {
                     return true;
                 }
 
-                long timeStart, timeEnd, intervalPlayback, intervalLookup;
+                long timeStart, timeEnd;
+                int intervalPlayback, intervalLookup;
 
                 try {
                     timeStart = Utils.parseTime(args[1] + " " + args[2]);
                     timeEnd = Utils.parseTime(args[3] + " " + args[4]);
-                    intervalPlayback = Integer.parseInt(args[5]);
-                    intervalLookup = Integer.parseInt(args[6]);
+                    intervalLookup = Integer.parseInt(args[5]);
+                    intervalPlayback = Integer.parseInt(args[6]);
                 } catch (ParseException e) {
                     sender.sendMessage("can't parse date");
                     return true;
                 }
 
-                timelapse = new Timelapse(this, sender, timeStart, timeEnd, intervalPlayback, intervalLookup);
+                timelapse = new Timelapse(this, sender, timeStart, timeEnd, intervalLookup, intervalPlayback);
                 timelapse.start();
 
                 return true;
