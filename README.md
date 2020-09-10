@@ -1,2 +1,2 @@
 # blocklapse
-Allows the creation of timelapses from LogBlock logs. [Requires LogBlock!](https://github.com/LogBlock/LogBlock/)
+Allows the creation of timelapses from [LogBlock](https://github.com/LogBlock/LogBlock/) logs.
